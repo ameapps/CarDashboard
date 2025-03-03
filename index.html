@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opel Corsa 2018 Dashboard</title>
+    <style>
+      body {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .dashboard {
+        width: 600px;
+        background: #222;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+      }
+      .fuel-gauge {
+        width: 50px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: #333;
+        border-radius: 10px;
+        padding: 5px;
+      }
+      .fuel-level {
+        width: 100%;
+        background: limegreen;
+        transition: height 0.5s ease;
+      }
+      .display {
+        width: 200px;
+        background: black;
+        padding: 20px;
+        height: 150px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 20px;
+      }
+      .gauge {
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, #444 30%, #222 70%);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .needle {
+        width: 4px;
+        height: 50px;
+        background: red;
+        position: absolute;
+        bottom: 50%;
+        transform-origin: bottom;
+        transform: rotate(0deg);
+        transition: transform 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="fuel-gauge">
+        <div class="fuel-level" id="fuelLevel" style="height: 80%"></div>
+      </div>
+      <div class="display" id="speedDisplay">0 km/h</div>
+      <div class="gauge">
+        <div class="needle" id="speedNeedle"></div>
+        km/h
+      </div>
+    </div>
+    <script>
+      function updateDashboard(speed, fuel) {
+        document.getElementById("speedDisplay").innerText = speed + " km/h";
+        document.getElementById("speedNeedle").style.transform = `rotate(${
+          speed * 1.5
+        }deg)`;
+        document.getElementById("fuelLevel").style.height = `${fuel}%`;
+        document.getElementById("fuelLevel").style.background =
+          fuel < 20 ? "red" : "limegreen";
+      }
+
+      // Simulazione di aggiornamento dati
+      setInterval(() => {
+        let speed = Math.floor(Math.random() * 200);
+        let fuel = Math.floor(Math.random() * 100);
+        updateDashboard(speed, fuel);
+      }, 1000);
+    </script>
+  </body>
+</html>
